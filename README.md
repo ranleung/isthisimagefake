@@ -6,7 +6,7 @@ Build a model to detect digitally altered images with Error Level Analysis.
 94% accuracy with Convolutional Neural Network
 
 #### Check it out:
-[www.isthisimagefake.com](https://www.google.com)
 
+[www.isthisimagefake.com](www.isthisimagefake.com)
 
-Note: Readme is still in progress...
+Note: App and ReadMe still work in progress...
