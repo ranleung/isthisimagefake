@@ -105,6 +105,8 @@ CNN is primarily used for image classification because it has the ability to lea
 
 Our network consists of 1 input layer, 1 hidden layer, and 1 output layer with Dropout in each layer to reduce overfitting by preventing a layer from seeing twice the exact same pattern.
 
+![summary](images/cnn_summary.png "cnn summary")
+
 ## Results: <a id="results"></a>
 ### 94% accuracy with Convolutional Neural Network.
 
