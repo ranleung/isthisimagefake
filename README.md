@@ -19,7 +19,7 @@ Recently I read an article from The Verge titled "[Artificial Intelligence is go
 
 ![Aricle-Clip](images/article_snippet_fake.png "Article Clip")
 
-I was curious, if machine learning enables the ability to create fakes, can I use machine learning to detect if an image was fake?  The implications of a fake image being distributed from the internet can easily sway a person's opinion and boost one's agenda.  I thought this bwas an issue worth tackling.
+I was curious, if machine learning enables the ability to create fakes, can I use machine learning to detect if an image was fake?  The implications of a fake image being distributed from the internet can easily sway a person's opinion and boost one's agenda.  I thought this was an issue worth tackling.
 
 #### Challeneges: <a id="challenges"></a>
 
@@ -38,7 +38,7 @@ ELA works by re-saving the image at 90% - 95% compression and compares the diffe
 
 Using the ELA image, we now can have a *common factor* among the fake images in hopes that our machine learning model can learn these signals.  Since reading ELA images requires a trained eye as the image can produce a wide range of variations, and painfully the process is not automated, we can leverage machine learning models to assist us.
 
-Note: This technique is not perfect and we will go over the cavets in the 'What's next?' section.
+Note: This technique is not perfect and we will go over the caveats in the 'What's next?' section.
 
 
 ## Data Flow: <a id="data"></a>
@@ -65,20 +65,20 @@ Here is our data flow on how the model was trained and tested on:
 
 ## Model Selection: <a id="selection"></a>
 
-Now that we have gathered our data and a general flow on how to train our model, we can now use the same pipeline to test on mutiple models.
+Now that we have gathered our data and a general flow on how to train our model, we can now use the same pipeline to test on multiple models.
 
 Since this is a classification (predicting fake or not fake) problem, these models were taken into consideration:
 
 * Logistic Regression
 * Random Forest
-* Gradient Boosting 
+* Gradient Boosting
 * AdaBoost
 * xgBoost
 * Random Forest + AdaBoost
 * Random Forest + Gradient Boosting
 * Convolutional Neural Network
 
-Here is the results displayed under a ROC Curve.  A ROC Curve is a way to visual the performance of the binary classifer model.  The area under the curve (AUC) measures the performance of a binary classifier averaged across all possible decision thresholds.
+Here is the results displayed under a ROC Curve.  A ROC Curve is a way to visual the performance of the binary classifier model.  The area under the curve (AUC) measures the performance of a binary classifier averaged across all possible decision thresholds.
 
 ![ROC](images/ROC_Curve.png "ROC")
 
@@ -110,7 +110,7 @@ Our network consists of 1 input layer, 1 hidden layer, and 1 output layer with D
 ## Results: <a id="results"></a>
 ### 94% accuracy with Convolutional Neural Network.
 
-A closer dive into our model, 
+A closer dive into our model,
 
 ![CNN Loss](images/binary_loss.png "CNN Loss")
 ![CNN Accuracy](images//binary_acc.png "CNN Accuracy")
@@ -123,11 +123,11 @@ As the loss value converges around 20 epochs, the test accuracy is greater than 
 
 ## What's next?: <a id='next'></a>
 
-We were able to get a relatively high accuracy by using Convolutional Neural Networks.  Even others models such as Gradient Boosting and random forest performed reasonably well.  I believe this has much to do with the the data preprocessing steps.  We were able to apply Error Level Analysis on the imags to give our models some signal or common factor between fake and real images.
+We were able to get a relatively high accuracy by using Convolutional Neural Networks.  Even others models such as Gradient Boosting and random forest performed reasonably well.  I believe this has much to do with the the data preprocessing steps.  We were able to apply Error Level Analysis on the images to give our models some signal or common factor between fake and real images.
 
-**However, Error Level Analysis is not perfect.** As successive resave operation occurs, the error level will decrease over time.  After a number of resaves, the grid square reaches its minimum error level making it harder to detect the layers that were digitally touched.
+**However, Error Level Analysis is not perfect.** As successive re-save operation occurs, the error level will decrease over time.  After a number of re-saves, the grid square reaches its minimum error level making it harder to detect the layers that were digitally touched.
 
-Ultimately, I believe that ELA can compliment other existing verification techniques.  Other algorithms that we can implement are clone dectection, noise analysis, and even image metadata.
+Ultimately, I believe that ELA can compliment other existing verification techniques.  Other algorithms that we can implement are clone detection, noise analysis, and even image metadata.
 
 
 
