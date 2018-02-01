@@ -118,7 +118,7 @@ Our network consists of 1 input layer, 1 hidden layer, and 1 output layer with D
 A closer dive into our model,
 
 ![CNN Loss](images/binary_loss.png "CNN Loss")
-![CNN Accuracy](images//binary_acc.png "CNN Accuracy")
+![CNN Accuracy](images/binary_acc.png "CNN Accuracy")
 
 Measuring loss function is very important as it is used to measure the inconsistency between predicted values.  It implies how well or poorly the model behaves after each iteration of optimization.  Ideally, we should expect the reduction of loss after several iterations.  
 
@@ -139,6 +139,11 @@ Ultimately, I believe that ELA can complement other existing verification techni
 Check it out...
 ### [http://www.isthisimagefake.com](http://www.isthisimagefake.com)
 
+![React](images/react.png "React")
+
+![Flask](images/python-flask.png "React")
+
+![Keras](images/keras.jpg "React")
 
 ## References: <a id='ref'></a>
 
