@@ -15,15 +15,18 @@ Using machine learning to detect digitally altered images with Error Level Analy
 
 ## Introduction: <a id="intro"></a>
 
-Recently I read an article from The Verge titled "[Artificial Intelligence is going to make it easier than ever to fake images and videos](https://www.theverge.com/2016/12/20/14022958/ai-image-manipulation-creation-fakes-audio-video)".  From experience, I have personally seen fake images, usually photoshopped, being retweeted and shared among my social feed.  As the Verge article suggests, there is a proliferation of realistic fakes mainly due to how easy it is to create a fake by leveraging machine learning tools.  These images can seriously look very realistic.
+Recently I read an article from The Verge titled "[Artificial Intelligence is going to make it easier than ever to fake images and videos](https://www.theverge.com/2016/12/20/14022958/ai-image-manipulation-creation-fakes-audio-video)".  From experience, I have personally seen fake images, usually photoshopped, being retweeted, and shared among my social feed.  As the Verge article suggests, there is a proliferation of realistic fakes mainly due to how easy it is to create fakes by leveraging machine learning tools.  These images can seriously look very realistic.
 
 ![Aricle-Clip](images/article_snippet_fake.png "Article Clip")
+
+<sup>Source: [Gizmodo](https://gizmodo.com/29-viral-photos-and-gifs-from-2017-that-were-totally-fa-1821440079)</sup>
+
 
 I was curious, if machine learning enables the ability to create fakes, can I use machine learning to detect if an image was fake?  The implications of a fake image being distributed from the internet can easily sway a person's opinion and boost one's agenda.  I thought this was an issue worth tackling.
 
 #### Challeneges: <a id="challenges"></a>
 
-Just using machine learning models by itself isn't enough to classify if an image was fake.  There isn't a common factor among the fake images for the machine learning model to learn from.  We will have to feed our model another type of image instead of the original one.  Enter Error Level Analysis.
+Just using machine learning models by itself isn't enough to classify if an image was fake.  There isn't a common factor among the fake images for the machine to learn from.  We will have to feed our model another type of image instead of the original one.  Enter Error Level Analysis.
 
 ## Error Level Analysis: <a id="ela"></a>
 
@@ -36,22 +39,24 @@ ELA works by re-saving the image at 90% - 95% compression and compares the diffe
 ![Original](images/ela1.png "Original")(Image in question)
 ![ELA](images/ela2.png "ELA")(ELA representation)
 
-Using the ELA image, we now can have a *common factor* among the fake images in hopes that our machine learning model can learn these signals.  Since reading ELA images requires a trained eye as the image can produce a wide range of variations, and painfully the process is not automated, we can leverage machine learning models to assist us.
+Using the ELA image, we now can have a *common factor* among the fake images in hopes that our model can learn these signals.  Since reading ELA images requires a trained eye as the image can produce a wide range of variations, and painfully the process is not automated, we can leverage machine learning models to assist us.
 
-Note: This technique is not perfect and we will go over the caveats in the 'What's next?' section.
+<sup>Note: This technique is not perfect and we will go over the caveats in the 'What's next?' section.</sup>
 
 
 ## Data Flow: <a id="data"></a>
 
-For our data, we need fake and real images.  Fake images are described as images that have been digitally altered in any way.  This includes images being touched up or going through photoshop.  Real images are described as images that are not altered.
+To start, we need data, more specifically, we need fake and real images.  
+
+Fake images are described as images that have been digitally altered in any way.  This includes images being touched up or going through Photoshop.  Real images are described as images that are not altered.
 
 The distributions of these sources:
 ![sources](images/sources.png "Sources")
 
-- 2009 fake images from Imgur.
-- 946 real images from iPhone.
-- 550 real images from DSLR.
-- 512 real images from Imgur.
+- 2009 Fake images from Imgur.
+- 946 Real images from iPhone.
+- 550 Real images from DSLR.
+- 512 Real images from Imgur.
 
 
 Here is our data flow on how the model was trained and tested on:
@@ -78,7 +83,7 @@ Since this is a classification (predicting fake or not fake) problem, these mode
 * Random Forest + Gradient Boosting
 * Convolutional Neural Network
 
-Here is the results displayed under a ROC Curve.  A ROC Curve is a way to visual the performance of the binary classifier model.  The area under the curve (AUC) measures the performance of a binary classifier averaged across all possible decision thresholds.
+Here are the results displayed under a ROC Curve.  A ROC Curve is a way to visual the performance of the binary classifier model.  The area under the curve (AUC) measures the performance of a binary classifier averaged across all possible decision thresholds.
 
 ![ROC](images/ROC_Curve.png "ROC")
 
@@ -88,7 +93,7 @@ As you can see, **Convolutional Neural Network** gives us the best accuracy (94%
 
 In our case, **precision** ``` (TP)/(TP+FP) ``` tells us the proportion of images that we classified as fake are *actually* fake.  
 
-**Recall** ``` (TP)/(TP+FN) ``` tells us what proportion of images that *actually* were fake were predicted by us as being fake.
+**Recall** ``` (TP)/(TP+FN) ``` tells us what proportion of images that *actually* were fake were predicted by model as being fake.
 
 ![CNN F1](images/CNN_F1.png "CNN_F1")
 
@@ -99,9 +104,9 @@ We will continue by using Convolutional Neural Network as our model selection.
 
 ## Convolutional Neural Network: <a id="cnn"></a>
 
-With the common factor among the fake images from ELA, we can now do some preprocessing on the ela image and feed it into the convolutional neural network (CNN).  
+With the common factor among the fake images from ELA, we can now do some preprocessing on the ELA image and feed it into the convolutional neural network (CNN).  
 
-CNN is primarily used for image classification because it has the ability to learn basic things liked edges, dots, bright spots, and dark spots.  When a computer views an image, it sees an array of values depending on the size of the image.  The pixel values itself is between 0 to 225 which describes the pixel intensity.  We will feed in our CNN model with an array of numbers and the goal is for the model to output the probability of the image as fake.
+CNN is primarily used for image classification because it has the ability to learn basic things liked edges, dots, bright spots, and dark spots.  When a computer views an image, it sees an array of values depending on the size of the image.  The pixel values itself is between 0 to 225 which describes the pixel intensity.  We will feed in our CNN model with an array of numbers and the goal is for the model to learn the pattern and output the probability of the image as fake.
 
 Our network consists of 1 input layer, 1 hidden layer, and 1 output layer with Dropout in each layer to reduce overfitting by preventing a layer from seeing twice the exact same pattern.
 
@@ -123,11 +128,11 @@ As the loss value converges around 20 epochs, the test accuracy is greater than 
 
 ## What's next?: <a id='next'></a>
 
-We were able to get a relatively high accuracy by using Convolutional Neural Networks.  Even others models such as Gradient Boosting and random forest performed reasonably well.  I believe this has much to do with the the data preprocessing steps.  We were able to apply Error Level Analysis on the images to give our models some signal or common factor between fake and real images.
+We were able to get a relatively high accuracy by using Convolutional Neural Networks.  Even other models such as Gradient Boosting and Random Forest performed reasonably well.  I believe this has much to do with the data preprocessing steps.  We were able to apply Error Level Analysis on the images to give our models some signal or common factor between fake and real images.
 
 **However, Error Level Analysis is not perfect.** As successive re-save operation occurs, the error level will decrease over time.  After a number of re-saves, the grid square reaches its minimum error level making it harder to detect the layers that were digitally touched.
 
-Ultimately, I believe that ELA can compliment other existing verification techniques.  Other algorithms that we can implement are clone detection, noise analysis, and even image metadata.
+Ultimately, I believe that ELA can complement other existing verification techniques.  Other algorithms that we can implement are clone detection, noise analysis, and even reading image metadata.
 
 
 
