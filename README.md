@@ -145,6 +145,14 @@ Check it out...
 
 ![Keras](images/keras.jpg "React")
 
+---
+
+![Screen1](images/screen1.png "Screen1")
+
+![Screen2](images/screen2.png "Screen2")
+
+![Screen3](images/screen3.png "Screen3")
+
 ## References: <a id='ref'></a>
 
 * [https://ijcsits.org/papers/vol7no22017/4vol7no2.pdf](https://https://ijcsits.org/papers/vol7no22017/4vol7no2.pdf)
