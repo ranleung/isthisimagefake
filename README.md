@@ -117,6 +117,17 @@ Our network consists of 1 input layer, 1 hidden layer, and 1 output layer with D
 
 A closer dive into our model,
 
+![CNN CF](images/cnn_confusion_matrix.png "CNN CF")
+
+According to our confusion matrix.  We have:
+
+- High True Positives
+- High True Negatives
+- Low False Positives
+- Low False Negatives
+
+This is indicative a good model.  Because of the limitations of Error Level Analysis (for example successive resave operations will reach a minimum lower level), we expect to have a slightly higher level false negative, where model will think the image as real, but in reality, a fake.
+
 ![CNN Loss](images/binary_loss.png "CNN Loss")
 ![CNN Accuracy](images/binary_acc.png "CNN Accuracy")
 
