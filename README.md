@@ -24,7 +24,7 @@ Recently I read an article from The Verge titled "[Artificial Intelligence is go
 
 I was curious, if machine learning enables the ability to create fakes, can I use machine learning to detect if an image was fake?  The implications of a fake image being distributed from the internet can easily sway a person's opinion and boost one's agenda.  I thought this was an issue worth tackling.
 
-#### Challeneges: <a id="challenges"></a>
+#### Challenges: <a id="challenges"></a>
 
 Just using machine learning models by itself isn't enough to classify if an image was fake.  There isn't a common factor among the fake images for the machine to learn from.  We will have to feed our model another type of image instead of the original one.  Enter Error Level Analysis.
 
@@ -169,3 +169,11 @@ Check it out...
 * [https://ijcsits.org/papers/vol7no22017/4vol7no2.pdf](https://https://ijcsits.org/papers/vol7no22017/4vol7no2.pdf)
 * [https://fotoforensics.com/tutorial-ela.php](https://fotoforensics.com/tutorial-ela.php)
 * [http://cs231n.github.io/convolutional-networks/](http://cs231n.github.io/convolutional-networks/)
+
+
+## Steps:
+1) Get all real images
+2) Get all the fake images.  If from imgur, use "gen-imgur-csv.py".
+3) Download the images from CSV. "download_images_from_csv.py"
+4) Generate ela images by "ela-image.py"
+5) Resize ela images by "resize-images.py"
